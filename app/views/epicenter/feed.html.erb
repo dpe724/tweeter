@@ -1,0 +1,59 @@
+<div class="row">
+	<div class="col-sm-2">
+		<h2> Topics for You </h2>
+			<ul>
+				<li>
+					<a href="#"> #Puppies </a>
+				</li>
+				<li>
+					<a href="#"> #Kittens </a>
+				</li>
+				<li>
+					<a href="#"> #Programming </a>
+				</li>
+				<li>
+					<a href="#"> #Ruby </a>
+				</li>
+			</ul>
+	</div>
+
+	<div class="col-md-3 col-md-offset-1">
+		<h2>@<%= current_user.username %>'s Feed</h2>
+		<p><a href="#">load new tweets</a></p>
+		<%= render 'tweets/form.html.erb', tweet: @tweet %>
+		<div>
+			<% @following_tweets.each do |tweet| %>
+				<div class="well">
+					<p>
+						<%= image_tag tweet.user.avatar.url, size: 40 %>
+						<%= link_to tweet.user.name, show_user_path(id: tweet.user_id) %>
+						@<%= link_to tweet.user.username, show_user_path(id: tweet.user_id) %> 
+						-<%= (time_ago_in_words(tweet.created_at) + " ago") if Time.now - tweet.created_at <86400 %>
+						<%= (tweet.created_at.strftime("%b %e")) if Time.now - tweet.created_at >=86400 %>
+					</p>
+					<p><%= tweet.message.html_safe %></p>
+				</div>
+		  <% end %>
+		</div>
+	</div>
+
+<div class="col-sm-2">
+	<h2> Who to Follow </h2>
+	<ul>
+		<li>
+			<a href="#"> Barack Obama </a>
+		</li>
+		<li>
+			<a href="#"> Todd Lewis </a>
+		</li>
+		<li>
+			<a href="#"> Mick Jagger </a>
+		</li>
+		<li>
+			<a href="#"> Ozzy Osbourne </a>
+		</li>
+	</ul>
+
+
+</div> 
+</div>

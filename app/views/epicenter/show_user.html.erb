@@ -1,0 +1,35 @@
+<h2>@<%= @user.username %>'s Profile</h2>
+<p><%= @user.name %> </p>
+<p><%= @user.location %> </p>
+<p><%= @user.bio %> </p>
+
+<p>
+	# of Tweets: <%= @user.tweets.length %>
+</p>
+<p>
+	<%= link_to "following:" + @user.following.length.to_s, following_path(id: @user.id) %>
+</p>
+<p>
+	<%= link_to "followers:" + @followers_count.to_s, followers_path(id: @user.id) %>
+</p>
+
+<div>
+	<% if current_user.id != @user.id %>
+		<% if current_user.following.include?(@user.id) %>
+			<%= link_to "Following", unfollow_path(id: @user.id), class: "btn btn-success", id:"unfollow_btn" %>
+
+		<% else %>
+			<%= link_to "Follow", now_following_path(id: @user.id), class: "btn btn-success" %>
+		<% end %>
+	<% end %>
+</div>
+<br>
+
+<div>
+  <% @user.tweets.each do |tweet| %>
+		<div class="well">
+			<p>@<%= link_to tweet.user.username, show_user_path(id: tweet.user_id) %> </p>
+			<p><%= tweet.message.html_safe %></p>
+		</div>
+	<% end %>
+</div>
