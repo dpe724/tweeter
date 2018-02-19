@@ -25,9 +25,11 @@
 			<% @following_tweets.each do |tweet| %>
 				<div class="well">
 					<p>
+						<% if tweet.user.avatar.url %>
 						<%= image_tag tweet.user.avatar.url, size: 40 %>
+						<% end %>
 						<%= link_to tweet.user.name, show_user_path(id: tweet.user_id) %>
-						@<%= link_to tweet.user.username, show_user_path(id: tweet.user_id) %> 
+						@<%= link_to tweet.user.username, show_user_path(id: tweet.user_id) %>
 						-<%= (time_ago_in_words(tweet.created_at) + " ago") if Time.now - tweet.created_at <86400 %>
 						<%= (tweet.created_at.strftime("%b %e")) if Time.now - tweet.created_at >=86400 %>
 					</p>
@@ -55,5 +57,5 @@
 	</ul>
 
 
-</div> 
+</div>
 </div>
